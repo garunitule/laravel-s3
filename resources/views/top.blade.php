@@ -1,9 +1,10 @@
 <!DOCTYPE html>
     <body>
         <h1>S3基本操作</h1>
-        <form method="post">
+        <form method="post" action="/s3/upload" enctype="multipart/form-data">
+            @csrf
             <label for="s3">画像ファイル</label>
-            <input type="file" name="s3">
+            <input type="file" name="upload-image">
             <input type="submit" name="upload" value="upload">
         </form>
     </body>
