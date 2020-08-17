@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Aws\Exception\AwsException;
 use App\Models\S3;
 
 class S3Controller extends Controller
@@ -17,6 +16,6 @@ class S3Controller extends Controller
 
     public function upload(Request $request)
     {
-        $this->S3->upload($_FILES['upload-image']['name'], $_FILES['upload-image']['name']);
-    }    
+        $this->S3->upload($request->file('upload')->path(), $request->file('upload')->hashName());
+    }
 }
