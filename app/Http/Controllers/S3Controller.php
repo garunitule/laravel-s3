@@ -16,6 +16,13 @@ class S3Controller extends Controller
 
     public function upload(Request $request)
     {
+        dd($request->file('upload')->path());
         $this->S3->upload($request->file('upload')->path(), $request->file('upload')->hashName());
+    }
+
+    public function index()
+    {
+        $files = $this->S3->index();
+        dd($files);
     }
 }

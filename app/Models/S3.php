@@ -7,16 +7,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class S3 extends Model
 {
-    public function upload($file, $key)
+    private $s3Client;
+
+    public function __construct()
     {
-        $s3client = new S3Client([
+        $this->s3Client = new S3Client([
             'version' => 'latest',
             'region' => env('AWS_DEFAULT_REGION', 'Region'),
         ]);
-        $reault = $s3client->putObject([
+    } 
+
+    public function upload($file, $key)
+    {
+        $reault = $this->s3Client->putObject([
             'Bucket' => env('AWS_BUCKET', 'Bucket'),
             'Key' => $key,
             'SourceFile' => $file,
+        ]);
+    }
+
+    public function index()
+    {
+        return $this->s3Client->ListObjects([
+            'Bucket' => env('AWS_BUCKET', 'Bucket'),
         ]);
     }
 }
