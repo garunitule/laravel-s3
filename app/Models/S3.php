@@ -24,12 +24,14 @@ class S3 extends Model
             'Key' => $key,
             'SourceFile' => $file,
         ]);
+        return;
     }
 
     public function index()
     {
-        return $this->s3Client->ListObjects([
+        $result = $this->s3Client->ListObjects([
             'Bucket' => env('AWS_BUCKET', 'Bucket'),
         ]);
+        return $result->get('Contents');
     }
 }

@@ -7,10 +7,22 @@
             <input type="file" name="upload">
             <input type="submit" name="upload" value="upload">
         </form>
-        <h1>S3取得</h1>
-        <form method="get" action="/s3/index" enctype="multipart/form-data">
-            @csrf
-            <input type="submit" name="index" value="index">
-        </form>
+        @if (isset($files))
+            <h1>S3一覧取得</h1>
+            <table>
+                <thead>
+                    <td>Key</td>
+                    <td>Displayname</td>
+                </thead>
+                <tbody>
+                    @foreach ($files as $file)
+                        <tr>
+                            <td>{{ $file['Key'] }}</td>
+                            <td>{{ $file['Owner']['DisplayName'] }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
     </body>
 </html>
