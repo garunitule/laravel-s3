@@ -11,9 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('top');
-});
-
+Route::get('/', 'S3Controller@index');
 Route::post('/s3/upload', 'S3Controller@upload');
-Route::get('/s3/index', 'S3Controller@index');
